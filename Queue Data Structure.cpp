@@ -59,7 +59,32 @@ class Queue
 		
 		int dequeue()
 		{
+			int x;
+			if(isEmpty())
+			{
+				return 0;
+			}
+			else if(front == rear)
+			{
+				x = arr[front];
+				rear = -1;
+				front = -1;
+				arr[front] = 0;
+				return x;
+			}
+			else
+			{
+				x = arr[front];
+				arr[front] = 0;
+				front++;
+				return x;
+			}
 			
+		}
+		
+		int count()
+		{
+			return (rear - front + 1);
 		}
 		
 		

@@ -7,11 +7,12 @@ class CircularQueue
 		int front;
 		int rear;
 		int arr[5];
-		
+		int itemCount;
 		
 	public:
 		CircularQueue()
-		{
+		{	
+			itemCount = 0;
 			front = -1;
 			rear = -1;
 			
@@ -32,7 +33,7 @@ class CircularQueue
 		
 		bool isFull()
 		{
-			if(rear+1%5 == front)
+			if( (rear+1)%5 == front)
 				return true;
 			else 
 				return false;	
@@ -43,6 +44,7 @@ class CircularQueue
 			if(isFull())
 			{
 				cout << "Queue Is Full. " << endl;
+				return ;
 			}
 			else if(isEmpty())
 			{
@@ -55,6 +57,7 @@ class CircularQueue
 				rear = (rear+1) % 5;
 				arr[rear] = val;
 			}
+			itemCount++;
 		}
 		
 		int dequeue()
@@ -70,6 +73,7 @@ class CircularQueue
 				x = arr[rear];
 				rear = -1;
 				front = -1;
+				itemCount--;
 				return x;
 			}
 			else
@@ -77,7 +81,8 @@ class CircularQueue
 				cout << "Front Value : " << front << endl;
 				x = arr[front];
 				arr[front] = 0;
-				front++;
+				front = (front+1)%5;
+				itemCount--;
 				return x;
 			}
 			
@@ -85,7 +90,7 @@ class CircularQueue
 		
 		int count()
 		{
-			return (rear - front + 1);
+			return (itemCount);
 		}
 		
 		void display()
